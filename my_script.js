@@ -15,10 +15,21 @@ var height = 30;
 var queue = [];
 var door = [];
 
+function clear_grid(){
+    queue = [];
+    door = [];
+    console.log("clearing", queue);
+    for (let i = 0; i < height; i++){
+        for (let j = 0; j < width; j++){
+            document.getElementById(get_cell_name(i,j)).className = "unvisited";
+        }
+    }
+}
+
 function action(){
+    clear_grid();
     add_border(width, height);
     div_maze(1, 1, width-2, height-2, -1, -1);
-    mazeGenerationAnimations();
     for (let i = 0; i< queue.length; i++) {
         for (let j = 0; j < door.length; j++){
             if (queue[i] == door[j]){
@@ -26,6 +37,7 @@ function action(){
             }
         }
     }
+    mazeGenerationAnimations();
 }
 
 // create grid
@@ -144,8 +156,8 @@ create_grid(width,height);
 function mazeGenerationAnimations() {
   // let nodes = board.wallsToAnimate.slice(0);
     let speed = 1;
-    console.log(queue.length);
-    console.log(queue[queue.length-1]);
+    // console.log(queue.length);
+    // console.log(queue[queue.length-1]);
     function timeout(index) {
         setTimeout(function () {
             if (index === queue.length){
@@ -157,4 +169,7 @@ function mazeGenerationAnimations() {
         }, speed);
     }
     timeout(0);
+    // for (let index = 0; index < queue.length; index++){
+    //     document.getElementById(queue[index]).className = "wall";
+    // }
 }
