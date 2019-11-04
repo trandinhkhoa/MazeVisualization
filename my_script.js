@@ -86,7 +86,6 @@ function get_cell_name(y, x) {
 function wallify(y,x) {
     maze[y][x] = 1;
     queue.push(get_cell_name(y,x));
-    // document.getElementById(get_cell_name(x, y)).className = "wall" ;   
 }
 
 function get_random_int(min, max) {
@@ -141,7 +140,6 @@ function div_maze(top_left_x, top_left_y, bottom_right_x, bottom_right_y, door_x
             door.push(get_cell_name(wall_y, door_x));
             maze[wall_y][door_x] = 0;
         }
-        // document.getElementById(get_cell_name(wall_y, door_x)).className = "unvisited";
         div_maze(top_left_x, top_left_y, bottom_right_x, wall_y-1, door_x, wall_y);
         div_maze(top_left_x, wall_y+1, bottom_right_x, bottom_right_y, door_x, wall_y);
     } else {
@@ -172,21 +170,16 @@ function div_maze(top_left_x, top_left_y, bottom_right_x, bottom_right_y, door_x
             maze[door_y][wall_x] = 0;
             door.push(get_cell_name(door_y, wall_x));
         }
-        // document.getElementById(get_cell_name(door_y, wall_x)).className = "unvisited";
         div_maze(top_left_x, top_left_y, wall_x-1, bottom_right_y, wall_x, door_y);
         div_maze(wall_x+1, top_left_y, bottom_right_x, bottom_right_y, wall_x, door_y);
     }
     return;
 }
-//
+
 create_grid(width,height);
-//
-//
+
 function mazeGenerationAnimations() {
-  // let nodes = board.wallsToAnimate.slice(0);
-    let speed = 10;
-    // console.log(queue.length);
-    // console.log(queue[queue.length-1]);
+    let speed = 1;
     function timeout(index) {
         setTimeout(function () {
             if (index === queue.length){
@@ -198,7 +191,4 @@ function mazeGenerationAnimations() {
         }, speed);
     }
     timeout(0);
-    // for (let index = 0; index < queue.length; index++){
-    //     document.getElementById(queue[index]).className = "wall";
-    // }
 }
